@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { chatSession } from "@/services/AiModel";
 import { selectBudgetOptions } from "@/utils/selectBudgetOptions";
 import { selectTrevelList } from "@/utils/selectTrevelList";
+import { tripPromt } from "@/utils/tripPromt";
 import { useState } from "react";
+import { toast } from "sonner";
 const ItinerarieForm = () => {
   const [formData, setFormData] = useState({
     destination: "",
@@ -10,8 +13,25 @@ const ItinerarieForm = () => {
     budget: "",
     travelWith: "",
   });
-  const handleSubmit = () => {
-    console.log(formData);
+  const handleSubmit = async () => {
+    if (
+      !formData.destination ||
+      !formData.days ||
+      !formData.budget ||
+      !formData.travelWith
+    ) {
+      toast.error("Please fill all fields");
+      return;
+    }
+    const FINAL_PROMT = tripPromt
+      .replace("{location}", formData.destination)
+      .replace("{days}", formData.days)
+      .replace("{treveler}", formData.travelWith)
+      .replace("{budget}", formData.budget);
+
+    const result = await chatSession.sendMessage(FINAL_PROMT);
+    console.log(result?.response?.text());
+
     setFormData({ destination: "", days: "", budget: "", travelWith: "" }); // clear form
   };
   return (
