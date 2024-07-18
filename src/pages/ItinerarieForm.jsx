@@ -1,3 +1,4 @@
+import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { chatSession } from "@/services/AiModel";
@@ -6,6 +7,14 @@ import { selectTrevelList } from "@/utils/selectTrevelList";
 import { tripPromt } from "@/utils/tripPromt";
 import { useState } from "react";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+} from "@/components/ui/dialog";
+import { useGoogleLogin } from "@react-oauth/google";
+
 const ItinerarieForm = () => {
   const [formData, setFormData] = useState({
     destination: "",
@@ -13,7 +22,16 @@ const ItinerarieForm = () => {
     budget: "",
     travelWith: "",
   });
+  const [openDialoge, setOpenDialoge] = useState(false);
   const handleSubmit = async () => {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      setOpenDialoge(true);
+      toast.error("Please login to continue");
+      return;
+    }
+
     if (
       !formData.destination ||
       !formData.days ||
@@ -33,6 +51,33 @@ const ItinerarieForm = () => {
     console.log(result?.response?.text());
 
     setFormData({ destination: "", days: "", budget: "", travelWith: "" }); // clear form
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: (res) => {
+      console.log(res);
+      userProfile(res);
+    },
+    onError: (error) => console.log(error),
+  });
+
+  const userProfile = async (tokenInfo) => {
+    const data = await fetch(
+      ` https://www.googleapis.com/oauth2/v1/userinfo?access_token=${tokenInfo?.access_token}`,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenInfo?.access_token}`,
+          Accept: "application/json",
+        },
+      }
+    );
+    const res = await data.json();
+    setOpenDialoge(false);
+
+    console.log(res);
+    localStorage.setItem("user", JSON.stringify(res));
+    ItinerarieForm();
+    toast.success("Login success");
   };
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-72 px-5 mt-10">
@@ -122,6 +167,25 @@ const ItinerarieForm = () => {
           Generate Trip
         </Button>
       </div>
+
+      <Dialog open={openDialoge}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogDescription>
+              <img src="/Logo.svg" alt="logo" />
+              <h2 className="font-bold text-lg mt-7">Sign in with google</h2>
+              <p>sign in to the app with google authentication securely</p>
+              <Button
+                onClick={login}
+                className="w-full mt-5 flex gap-4 items-center"
+              >
+                <FcGoogle className="text-2xl mr-2" />
+                Sign in With Google
+              </Button>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
