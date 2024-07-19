@@ -61,21 +61,27 @@ const ItinerarieForm = () => {
     setFormData({ destination: "", days: "", budget: "", travelWith: "" }); // clear form
   };
 
-  const saveToFirebase = async (data) => {
-    setLoading(true);
-    const user = JSON.parse(localStorage.getItem("user"));
-    const docId = Date.now().toString();
+  let saveToFirebase;
+  try {
+    saveToFirebase = async (data) => {
+      setLoading(true);
+      const user = JSON.parse(localStorage.getItem("user"));
+      const docId = Date.now().toString();
 
-    await setDoc(doc(db, "AiTrips", docId), {
-      userSelection: formData,
-      tripData: JSON.parse(data),
-      userEmail: user?.email,
-      id: docId,
-    });
+      await setDoc(doc(db, "AiTrips", docId), {
+        userSelection: formData,
+        tripData: JSON.parse(data),
+        userEmail: user?.email,
+        id: docId,
+      });
 
+      setLoading(false);
+      navigate(`/trip/${docId}`);
+    };
+  } catch (e) {
     setLoading(false);
-    navigate(`/trip/${docId}`);
-  };
+    toast.error(e.message);
+  }
 
   const login = useGoogleLogin({
     onSuccess: (res) => {

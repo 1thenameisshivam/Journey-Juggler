@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import InfoSection from "@/components/custom/InfoSection";
 import Hotels from "@/components/custom/Hotels";
+import Itinerarie from "@/components/custom/Itinerarie";
 const Trip = () => {
   const [trip, setTrip] = useState([]);
   const { tripId } = useParams();
@@ -35,6 +36,7 @@ const Trip = () => {
       {/*Hotel Plans*/}
       <Hotels data={trip?.tripData?.hotels} />
       {/*Daily plan*/}
+      <Itinerarie data={trip?.tripData?.itinerary} />
       {/*Footer*/}
     </div>
   );
