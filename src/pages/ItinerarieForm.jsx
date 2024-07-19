@@ -14,8 +14,12 @@ import {
   DialogHeader,
 } from "@/components/ui/dialog";
 import { useGoogleLogin } from "@react-oauth/google";
-
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "@/services/firebaseService";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 const ItinerarieForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     destination: "",
     days: "",
@@ -23,6 +27,8 @@ const ItinerarieForm = () => {
     travelWith: "",
   });
   const [openDialoge, setOpenDialoge] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async () => {
     const user = localStorage.getItem("user");
 
@@ -41,6 +47,7 @@ const ItinerarieForm = () => {
       toast.error("Please fill all fields");
       return;
     }
+    setLoading(true);
     const FINAL_PROMT = tripPromt
       .replace("{location}", formData.destination)
       .replace("{days}", formData.days)
@@ -49,13 +56,29 @@ const ItinerarieForm = () => {
 
     const result = await chatSession.sendMessage(FINAL_PROMT);
     console.log(result?.response?.text());
-
+    setLoading(false);
+    saveToFirebase(result?.response?.text());
     setFormData({ destination: "", days: "", budget: "", travelWith: "" }); // clear form
+  };
+
+  const saveToFirebase = async (data) => {
+    setLoading(true);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const docId = Date.now().toString();
+
+    await setDoc(doc(db, "AiTrips", docId), {
+      userSelection: formData,
+      tripData: JSON.parse(data),
+      userEmail: user?.email,
+      id: docId,
+    });
+
+    setLoading(false);
+    navigate(`/trip/${docId}`);
   };
 
   const login = useGoogleLogin({
     onSuccess: (res) => {
-      console.log(res);
       userProfile(res);
     },
     onError: (error) => console.log(error),
@@ -73,12 +96,11 @@ const ItinerarieForm = () => {
     );
     const res = await data.json();
     setOpenDialoge(false);
-
-    console.log(res);
     localStorage.setItem("user", JSON.stringify(res));
-    ItinerarieForm();
+    handleSubmit();
     toast.success("Login success");
   };
+
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-72 px-5 mt-10">
       <h1 className="font-bold text-3xl">Tell us your travel Preferences</h1>
@@ -162,9 +184,14 @@ const ItinerarieForm = () => {
         <Button
           onClick={() => handleSubmit()}
           type={"submit"}
+          disabled={loading}
           className={"bg-green-500"}
         >
-          Generate Trip
+          {loading ? (
+            <AiOutlineLoading3Quarters className="w-7 h-7 animate-spin" />
+          ) : (
+            "Generate Trip"
+          )}
         </Button>
       </div>
 

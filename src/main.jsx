@@ -7,6 +7,7 @@ import Home from "./pages/Home.jsx";
 import ItinerarieForm from "./pages/ItinerarieForm.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { VITE_GOOGLE_AUTHENTICATION_CLIENT_ID } from "./utils/constent.js";
+import Trip from "./pages/Trip.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/create-itineraries",
         element: <ItinerarieForm />,
+      },
+      {
+        path: "/trip/:tripId",
+        element: <Trip />,
       },
     ],
   },
