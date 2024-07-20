@@ -57,7 +57,13 @@ const Header = () => {
             >
               My Trips
             </Button>
-
+            <Button
+              onClick={() => navigate("/create-itineraries")}
+              variant="outline"
+              className="rounded-xl"
+            >
+              ➕ Trips
+            </Button>
             <Popover>
               <PopoverTrigger>
                 <img
