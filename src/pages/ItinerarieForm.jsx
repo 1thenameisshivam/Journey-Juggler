@@ -47,6 +47,7 @@ const ItinerarieForm = () => {
       toast.error("Please fill all fields");
       return;
     }
+    toast.success("Be Patience We Are Generating Your Trip Please Wait ...");
     setLoading(true);
     const FINAL_PROMT = tripPromt
       .replace("{location}", formData.destination)
@@ -55,7 +56,6 @@ const ItinerarieForm = () => {
       .replace("{budget}", formData.budget);
 
     const result = await chatSession.sendMessage(FINAL_PROMT);
-    console.log(result?.response?.text());
     setLoading(false);
     saveToFirebase(result?.response?.text());
     setFormData({ destination: "", days: "", budget: "", travelWith: "" }); // clear form
