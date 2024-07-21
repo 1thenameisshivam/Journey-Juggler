@@ -14,8 +14,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
+import Logo from "./Logo";
 const Header = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
@@ -46,7 +47,9 @@ const Header = () => {
 
   return (
     <div className="flex justify-between items-center p-3 px-5 shadow-sm">
-      <img src="\Logo.svg" alt="logo" />
+      <Link to="/">
+        <Logo />
+      </Link>
       <div>
         {user ? (
           <div className="flex items-center gap-3">

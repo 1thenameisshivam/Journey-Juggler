@@ -30,7 +30,7 @@ const Trip = () => {
   return (
     <div className="p-10 md:px-20 lg:px-44  xl:px-56">
       {/*Information section*/}
-      <InfoSection data={trip?.userSelection} />
+      <InfoSection data={trip?.userSelection} id={trip?.id} />
       {/*Hotel Plans*/}
       <Hotels data={trip?.tripData?.hotels} />
       {/*Daily plan*/}

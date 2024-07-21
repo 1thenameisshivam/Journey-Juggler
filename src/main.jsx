@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { VITE_GOOGLE_AUTHENTICATION_CLIENT_ID } from "./utils/constent.js";
 import Trip from "./pages/Trip.jsx";
 import MyTrips from "./pages/MyTrips.jsx";
-
+import Error from "./pages/Error.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +32,7 @@ const router = createBrowserRouter([
         element: <MyTrips />,
       },
     ],
+    errorElement: <Error />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(

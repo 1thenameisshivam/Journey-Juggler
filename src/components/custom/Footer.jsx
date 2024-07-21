@@ -1,28 +1,15 @@
+import { Link } from "react-router-dom";
+import Logo from "./Logo";
+import { CiLinkedin } from "react-icons/ci";
 const Footer = () => {
   return (
     <footer className="py-6 dark:bg-gray-100 dark:text-gray-900">
       <div className="container px-6 mx-auto space-y-6 divide-y dark:divide-gray-600 md:space-y-12 divide-opacity-50">
         <div className="grid grid-cols-12">
           <div className="pb-6 col-span-full md:pb-0 md:col-span-6">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="flex justify-center space-x-3 md:justify-start"
-            >
-              <div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-600">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  fill="currentColor"
-                  className="flex-shrink-0 w-5 h-5 rounded-full dark:text-gray-50"
-                >
-                  <path d="M18.266 26.068l7.839-7.854 4.469 4.479c1.859 1.859 1.859 4.875 0 6.734l-1.104 1.104c-1.859 1.865-4.875 1.865-6.734 0zM30.563 2.531l-1.109-1.104c-1.859-1.859-4.875-1.859-6.734 0l-6.719 6.734-6.734-6.734c-1.859-1.859-4.875-1.859-6.734 0l-1.104 1.104c-1.859 1.859-1.859 4.875 0 6.734l6.734 6.734-6.734 6.734c-1.859 1.859-1.859 4.875 0 6.734l1.104 1.104c1.859 1.859 4.875 1.859 6.734 0l21.307-21.307c1.859-1.859 1.859-4.875 0-6.734z"></path>
-                </svg>
-              </div>
-              <span className="self-center text-2xl font-semibold">
-                Brand name
-              </span>
-            </a>
+            <Link to="/">
+              <Logo />
+            </Link>
           </div>
         </div>
         <div className="grid justify-center pt-6 lg:justify-between">
@@ -38,7 +25,7 @@ const Footer = () => {
           <div className="flex justify-center pt-4 space-x-4 lg:pt-0 lg:col-end-13">
             <a
               rel="noopener noreferrer"
-              href="#"
+              href="https://www.instagram.com/___thenameisshivam___/?igsh=MWs2YnoybWMxdzIxaw%3D%3D&utm_source=qr"
               title="Instagram"
               className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-600 dark:text-gray-50"
             >
@@ -53,22 +40,15 @@ const Footer = () => {
             </a>
             <a
               rel="noopener noreferrer"
-              href="#"
-              title="Gmail"
+              href="https://www.linkedin.com/in/shivamkumar8987/"
+              title="Linkdin"
               className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 dark:bg-violet-600 dark:text-gray-50"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 32 32"
-                className="w-4 h-4"
-              >
-                <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
-              </svg>
+              <CiLinkedin className="text-xl" />
             </a>
             <a
               rel="noopener noreferrer"
-              href="#"
+              href="https://github.com/1thenameisshivam?tab=repositories"
               title="GitHub"
               className="flex items-center justify-center w-10 h-10 rounded-full dark:bg-violet-600 dark:text-gray-50"
             >

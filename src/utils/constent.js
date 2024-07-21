@@ -4,4 +4,5 @@ export const {
   VITE_FIREBASE_API_KEY,
   VITE_MESSAGESENDERID,
   VITE_FIREBASE_APPID,
+  VITE_FRONTENT_URL,
 } = import.meta.env;
