@@ -18,6 +18,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/services/firebaseService";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import Logo from "@/components/custom/Logo";
 const ItinerarieForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -205,7 +206,7 @@ const ItinerarieForm = () => {
         <DialogContent>
           <DialogHeader>
             <DialogDescription>
-              <img src="/Logo.svg" alt="logo" />
+              <Logo />
               <h2 className="font-bold text-lg mt-7">Sign in with google</h2>
               <p>sign in to the app with google authentication securely</p>
               <Button
