@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="flex justify-center items-center flex-col mx-56 gap-9">
+    <div className="flex justify-center items-center flex-col md:mx-56 gap-9">
       <h1 className="font-extrabold w-80 md:w-auto sm:text-[60px] text-center text-[30px] ">
         <span className="text-green-500">
           Discover Your Next Adventure With AI:
