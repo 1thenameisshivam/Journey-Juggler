@@ -50,6 +50,7 @@ const ItinerarieForm = () => {
     }
     if (formData.days > 5) {
       toast.error("Please select days less than 5");
+      return;
     }
     toast.success("Be Patience We Are Generating Your Trip Please Wait ...");
     setLoading(true);
