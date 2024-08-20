@@ -12,6 +12,8 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogClose,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { useGoogleLogin } from "@react-oauth/google";
 import { doc, setDoc } from "firebase/firestore";
@@ -222,6 +224,17 @@ const ItinerarieForm = () => {
               </Button>
             </DialogDescription>
           </DialogHeader>
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button
+                onClick={() => setOpenDialoge(!openDialoge)}
+                type="button"
+                variant="secondary"
+              >
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
