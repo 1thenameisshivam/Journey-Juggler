@@ -7,6 +7,8 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogFooter,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import {
@@ -111,6 +113,17 @@ const Header = () => {
               </Button>
             </DialogDescription>
           </DialogHeader>
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button
+                onClick={() => setOpenDialoge(!openDialoge)}
+                type="button"
+                variant="secondary"
+              >
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
