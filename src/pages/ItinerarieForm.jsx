@@ -145,7 +145,7 @@ const ItinerarieForm = () => {
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
-            placeholder={"eg: 5"}
+            placeholder={"eg: 3"}
             type={"number"}
           />
         </div>
