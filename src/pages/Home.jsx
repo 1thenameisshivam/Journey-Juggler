@@ -7,9 +7,7 @@ const Home = () => {
   return (
     <div className="flex justify-center items-center flex-col md:mx-56 gap-9">
       <h1 className="font-extrabold w-80 md:w-auto sm:text-[60px] text-center text-[30px] ">
-        <span className="text-green-500">
-          Discover Your Next Adventure With AI:
-        </span>
+        <span className="text-green-500">Di Your Next Adventure With AI:</span>
         Presonalized Itineraries at Your Fingertips
       </h1>
       <p className=" text-gray-500 text-center w-80 md:w-auto text-xl">
