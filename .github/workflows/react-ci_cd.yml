@@ -31,11 +31,11 @@ jobs:
       - name: Build project
         run: npm run build
 
-     - name: Deploy to Azure VM
-       uses: appleboy/scp-action@v0.1.4
-       with:
-         host: ${{ secrets.AZURE_HOST }}
-         username: ${{ secrets.AZURE_USER }}
-         key: ${{ secrets.AZURE_SSH_KEY }}
-         source: "dist/*"
-         target: "~/apps/journey-juggler"
+      - name: Deploy to Azure VM
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.AZURE_HOST }}
+          username: ${{ secrets.AZURE_USER }}
+          key: ${{ secrets.AZURE_SSH_KEY }}
+          source: "dist/*"
+          target: "~/apps/journey-juggler"
